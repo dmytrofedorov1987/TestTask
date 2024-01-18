@@ -5,13 +5,7 @@ import jakarta.servlet.ServletException;
 import java.sql.*;
 
 public class WarehouseDAOImp implements WarehouseDAO {
-    private final Connection connection;
-    private final ConnectionFactory factory;
 
-    public WarehouseDAOImp(Connection connection, ConnectionFactory factory) {
-        this.connection = connection;
-        this.factory = factory;
-    }
 
     @Override
     public void createTable() {
