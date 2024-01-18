@@ -5,23 +5,27 @@ import jakarta.servlet.ServletException;
 import java.sql.*;
 
 public class WarehouseDAOImp implements WarehouseDAO {
+    private final Connection connection;
 
+    public WarehouseDAOImp(Connection connection) {
+        this.connection = connection;
+    }
 
     @Override
     public void createTable() {
-        try(Connection connection = ConnectionFactory.getConnection()) {
+        try {
             try (Statement statement = connection.createStatement()) {
                 statement.execute("DROP TABLE IF EXISTS warehouse");
                 statement.execute("CREATE TABLE warehouse (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL, address_line_1 VARCHAR(100) NOT NULL, address_line_2 VARCHAR(100), city VARCHAR(50) NOT NULL, state VARCHAR(50) NOT NULL, country VARCHAR(50) NOT NULL, inventory_quantity INT NOT NULL)");
             }
-        } catch (SQLException ex) {
+        } catch(SQLException ex){
             throw new RuntimeException(ex);
         }
     }
 
     @Override
     public void addWarehouse(Warehouse warehouse) {
-        try (Connection connection = ConnectionFactory.getConnection()){
+        try {
             try (PreparedStatement pr = connection.prepareStatement("INSERT INTO warehouse(name, address_line_1, address_line_2, city, state, country, inventory_quantity) VALUES (?,?,?,?,?,?,?)")) {
                 pr.setString(1, warehouse.getName());
                 pr.setString(2, warehouse.getAddress_line_1());
@@ -40,7 +44,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
 
     @Override
     public void updateWarehouse(Warehouse warehouse) {
-        try (Connection connection = ConnectionFactory.getConnection()){
+        try {
             try (PreparedStatement pr = connection.prepareStatement("UPDATE warehouse SET (name, address_line_1, address_line_2, city, state, country, inventory_quantity) VALUES (?,?,?,?,?,?,?) WHERE id = ?")) {
                 pr.setString(1, warehouse.getName());
                 pr.setString(2, warehouse.getAddress_line_1());
@@ -60,7 +64,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
 
     @Override
     public void deleteWarehouse(int id) {
-        try (Connection connection = ConnectionFactory.getConnection()){
+        try {
             try (PreparedStatement pr = connection.prepareStatement("DELETE warehouse WHERE id = ?")) {
                 pr.setInt(1, id);
                 pr.executeUpdate();
@@ -74,7 +78,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
     @Override
     public Warehouse getWarehouse(int id) {
         Warehouse warehouse = new Warehouse();
-        try (Connection connection = ConnectionFactory.getConnection()){
+        try  {
             try (PreparedStatement pr = connection.prepareStatement("SELECT warehouse WHERE id = ?")) {
                 pr.setInt(1, id);
                 ResultSet resultSet = pr.executeQuery();

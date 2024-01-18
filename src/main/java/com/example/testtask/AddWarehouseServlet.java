@@ -7,19 +7,28 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
  */
 @WebServlet("/add")
 public class AddWarehouseServlet extends HttpServlet {
+    static final Connection conn;
+
+    static {
+        try {
+            conn = ConnectionFactory.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        WarehouseDAOImp warehouseDAOImp = new WarehouseDAOImp();
+        WarehouseDAOImp warehouseDAOImp = new WarehouseDAOImp(conn);
         warehouseDAOImp.createTable();
         String jsonWarehouse = req.getParameter("Warehouse");
         ObjectMapper objectMapper = new ObjectMapper();
