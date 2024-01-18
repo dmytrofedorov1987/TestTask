@@ -7,19 +7,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.stream.Collectors;
 
 @WebServlet("/update")
 
 public class UpdateWarehouseServlet extends HttpServlet {
-    static WarehouseDAOImp warehouseDAOImp;
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String jsonWarehouse = req.getParameter("Warehouse");
+        WarehouseDAOImp warehouseDAOImp = new WarehouseDAOImp();
+        int id = Integer.parseInt(req.getParameter("id"));
+        String jsonWarehouse = req.getReader().lines().collect(Collectors.joining("\n"));
         ObjectMapper objectMapper = new ObjectMapper();
         Warehouse warehouse = objectMapper.readValue(jsonWarehouse, Warehouse.class);
-        warehouseDAOImp.updateWarehouse(warehouse);
+        warehouseDAOImp.updateWarehouse(warehouse, id);
     }
 
 }
