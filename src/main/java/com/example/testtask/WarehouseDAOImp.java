@@ -16,6 +16,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
         } catch (Exception e) {
 
         }
+        return connection;
     }
 
     @Override
@@ -26,6 +27,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
             try (Statement statement = connection.createStatement()) {
                 statement.execute("DROP TABLE IF EXISTS warehouse");
                 statement.execute("CREATE TABLE warehouse (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL, address_line_1 VARCHAR(100) NOT NULL, address_line_2 VARCHAR(100), city VARCHAR(50) NOT NULL, state VARCHAR(50) NOT NULL, country VARCHAR(50) NOT NULL, inventory_quantity INT NOT NULL)");
+                connection.close();
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -45,6 +47,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
                 pr.setString(6, warehouse.getCountry());
                 pr.setInt(7, warehouse.getInventory_quantity());
                 pr.executeUpdate();
+                connection.close();
             }
 
         } catch (SQLException ex) {
@@ -66,6 +69,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
                 pr.setInt(7, warehouse.getInventory_quantity());
                 pr.setInt(8, warehouse.getId());
                 pr.executeUpdate();
+                connection.close();
             }
 
         } catch (SQLException ex) {
@@ -80,6 +84,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
             try (PreparedStatement pr = connection.prepareStatement("DELETE warehouse WHERE id = ?")) {
                 pr.setInt(1, id);
                 pr.executeUpdate();
+                connection.close();
             }
 
         } catch (SQLException ex) {
@@ -104,6 +109,7 @@ public class WarehouseDAOImp implements WarehouseDAO {
                     warehouse.setState(resultSet.getString("state"));
                     warehouse.setCountry(resultSet.getString("country"));
                     warehouse.setInventory_quantity(resultSet.getInt("inventory_quantity"));
+                    connection.close();
                 }
             }
 
