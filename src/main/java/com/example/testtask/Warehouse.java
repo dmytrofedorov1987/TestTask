@@ -1,5 +1,8 @@
 package com.example.testtask;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Warehouse {
     private int id;
     private String name;
@@ -8,22 +11,28 @@ public class Warehouse {
     private String city;
     private String state;
     private String country;
-    private int inventory_quantity;
+    private int inventory_quantity = 0;
 
-    public Warehouse(String name,
-                     String address_line_1,
-                     String address_line_2,
-                     String city,
-                     String state,
-                     String country,
-                     int inventory_quantity) {
+    @JsonCreator
+    public Warehouse(@JsonProperty int id,
+                     @JsonProperty String name,
+                     @JsonProperty String address_line_1,
+                     @JsonProperty String address_line_2,
+                     @JsonProperty String city,
+                     @JsonProperty String state,
+                     @JsonProperty String country,
+                     @JsonProperty int inventory_quantity) {
+        this.id = id;
         this.name = name;
         this.address_line_1 = address_line_1;
         this.address_line_2 = address_line_2;
         this.city = city;
         this.state = state;
         this.country = country;
-        this.inventory_quantity = 0;
+        this.inventory_quantity = inventory_quantity;
+    }
+
+    public Warehouse() {
     }
 
     public int getId() {
@@ -88,5 +97,19 @@ public class Warehouse {
 
     public void setInventory_quantity(int inventory_quantity) {
         this.inventory_quantity = inventory_quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Warehouse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address_line_1='" + address_line_1 + '\'' +
+                ", address_line_2='" + address_line_2 + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", inventory_quantity=" + inventory_quantity +
+                '}';
     }
 }
