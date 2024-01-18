@@ -11,10 +11,10 @@ public class Warehouse {
     private String city;
     private String state;
     private String country;
-    private int inventory_quantity = 0;
-
+    private int inventory_quantity;
+/*
     @JsonCreator
-    public Warehouse(@JsonProperty int id,
+    public Warehouse(//@JsonProperty int id,
                      @JsonProperty String name,
                      @JsonProperty String address_line_1,
                      @JsonProperty String address_line_2,
@@ -22,6 +22,19 @@ public class Warehouse {
                      @JsonProperty String state,
                      @JsonProperty String country,
                      @JsonProperty int inventory_quantity) {
+        //this.id = id;
+        this.name = name;
+        this.address_line_1 = address_line_1;
+        this.address_line_2 = address_line_2;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.inventory_quantity = inventory_quantity;
+    }
+
+ */
+
+    public Warehouse(int id, String name, String address_line_1, String address_line_2, String city, String state, String country, int inventory_quantity) {
         this.id = id;
         this.name = name;
         this.address_line_1 = address_line_1;

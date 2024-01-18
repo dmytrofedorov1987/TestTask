@@ -5,7 +5,7 @@ public interface WarehouseDAO {
 
     void addWarehouse(Warehouse warehouse);
 
-    void updateWarehouse(Warehouse warehouse);
+    void updateWarehouse(Warehouse warehouse, int id);
 
     void deleteWarehouse(int id);
 
