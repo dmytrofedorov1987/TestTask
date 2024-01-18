@@ -11,15 +11,9 @@ import java.io.PrintWriter;
 
 @WebServlet("/get")
 public class GetWarehouseServlet extends HttpServlet {
-    /*
-        private final WarehouseDAOImp warehouseDAOImp;
-        public GetWarehouseServlet(WarehouseDAOImp warehouseDAOImp) {
-            this.warehouseDAOImp = warehouseDAOImp;
-        }
-    */
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        //warehouseDAOImp.createTable();
         WarehouseDAOImp warehouseDAOImp = new WarehouseDAOImp();
         //Warehouse warehouse = new Warehouse(1,"fff", "ffdfd","eee", "ttt", "jjhjhj", " d ", 111);
         Warehouse warehouse = warehouseDAOImp.getWarehouse(1);
@@ -27,7 +21,7 @@ public class GetWarehouseServlet extends HttpServlet {
         String json = objectMapper.writeValueAsString(warehouse);
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
+        //resp.setCharacterEncoding("UTF-8");
         out.print(json);
     }
 }
