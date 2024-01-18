@@ -11,17 +11,10 @@ import java.io.PrintWriter;
 
 @WebServlet("/get")
 public class GetWarehouseServlet extends HttpServlet {
-    /*
-        private final WarehouseDAOImp warehouseDAOImp;
-        public GetWarehouseServlet(WarehouseDAOImp warehouseDAOImp) {
-            this.warehouseDAOImp = warehouseDAOImp;
-        }
-    */
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        //warehouseDAOImp.createTable();
         WarehouseDAOImp warehouseDAOImp = new WarehouseDAOImp();
-        //Warehouse warehouse = new Warehouse(1,"fff", "ffdfd","eee", "ttt", "jjhjhj", " d ", 111);
         Warehouse warehouse = warehouseDAOImp.getWarehouse(1);
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(warehouse);
