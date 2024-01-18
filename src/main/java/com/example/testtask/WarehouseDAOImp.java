@@ -33,9 +33,6 @@ public class WarehouseDAOImp implements WarehouseDAO {
         }
     }
 
-
-
-
     @Override
     public void createTable() {
 
@@ -105,7 +102,6 @@ public class WarehouseDAOImp implements WarehouseDAO {
     public Warehouse getWarehouse(int id) {
         Warehouse warehouse = new Warehouse();
         try {
-            connection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
             try (PreparedStatement pr = connection.prepareStatement("SELECT warehouse WHERE id = ?")) {
                 pr.setInt(1, id);
                 ResultSet resultSet = pr.executeQuery();
