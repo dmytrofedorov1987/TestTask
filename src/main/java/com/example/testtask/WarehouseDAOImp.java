@@ -6,7 +6,7 @@ import java.sql.*;
 public class WarehouseDAOImp implements WarehouseDAO {
     static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/testtask?enabledTLSProtocols=TLSv1.2";
     static final String DB_USER = "root";
-    static final String DB_PASSWORD = "ald15111987";
+    static final String DB_PASSWORD = "your_password";
 
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Connection connection;
