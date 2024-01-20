@@ -1,4 +1,6 @@
-package com.example.testtask;
+package com.example.testtask.DAO;
+
+import com.example.testtask.model.Warehouse;
 
 public interface WarehouseDAO {
     void createTable();
